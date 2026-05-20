@@ -1,6 +1,7 @@
 import { RoomType } from '@blueprint3d/types/room_types'
 import { Blueprint3DTemplate } from '@blueprint3d/indexdb/blueprint-template'
-
+import maisonKamalRdc from '@/config/templates/maison-kamal-rdc.json'
+ 
 export interface TemplateOption {
   id: string
   name: string
@@ -9,14 +10,22 @@ export interface TemplateOption {
   roomType: RoomType
   template?: Blueprint3DTemplate
 }
-
-// Import templates (you can add more templates as needed)
-// For now, we'll define empty arrays and you can add templates later
+ 
+// Templates personnalisés
+const MAISON_KAMAL_RDC: TemplateOption = {
+  id: 'maison-kamal-rdc',
+  name: 'Maison Kamal — RDC',
+  description: 'Rez-de-chaussée de la maison de Kamal (style provençal, ~169 m²)',
+  preview: '🏠',
+  roomType: RoomType.LIVING_ROOM,
+  template: maisonKamalRdc as unknown as Blueprint3DTemplate
+}
+ 
 const BEDROOM_TEMPLATES: TemplateOption[] = []
-const LIVING_ROOM_TEMPLATES: TemplateOption[] = []
+const LIVING_ROOM_TEMPLATES: TemplateOption[] = [MAISON_KAMAL_RDC]
 const BATHROOM_TEMPLATES: TemplateOption[] = []
 const OFFICE_TEMPLATES: TemplateOption[] = []
-
+ 
 /**
  * Get templates by room type
  */
@@ -34,7 +43,7 @@ export function getTemplatesByRoomType(roomType: RoomType): TemplateOption[] {
       return []
   }
 }
-
+ 
 /**
  * Get all templates
  */
@@ -46,3 +55,4 @@ export function getAllTemplates(): TemplateOption[] {
     ...OFFICE_TEMPLATES
   ]
 }
+ 
